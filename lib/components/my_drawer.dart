@@ -57,7 +57,14 @@ class MyDrawer extends StatelessWidget {
               text: 'Exit',
               icon: Icons.logout,
               onTap: () {
-                //Navigate to logout
+                //close drawer
+                Navigator.pop(context);
+                //Navigate to intro page
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/intro_page',
+                  (route) => false,
+                );
               },
             ),
           ),

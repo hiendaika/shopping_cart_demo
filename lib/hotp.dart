@@ -16,19 +16,12 @@ class HOTP {
     100000000,
   ];
 
-  String? getOTPValue(String transaction) {
+  String? getOTPValue(String transaction, String deviceKeySmartOTP) {
     try {
       int epoch = DateTime.now().millisecondsSinceEpoch ~/ 30000;
       print("EPOCH: $epoch");
-      print(
-        "VALUE_OTP: ${PGBStorage.g().getString(Tags.REAL_DEVICE_KEY_SM) + transaction}",
-      );
-      return generateOTP(
-        utf8.encode(
-          PGBStorage.g().getString(Tags.REAL_DEVICE_KEY_SM) + transaction,
-        ),
-        epoch,
-      );
+      print("VALUE_OTP: $deviceKeySmartOTP$transaction}");
+      return generateOTP(utf8.encode(deviceKeySmartOTP + transaction), epoch);
     } catch (e) {
       print("EX: $e");
     }
